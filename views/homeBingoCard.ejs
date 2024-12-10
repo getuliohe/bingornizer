@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <% if (existingBingoCards) { %>
+        <% existingBingoCards.forEach(bingoCard => { %>
+            <div class="bingoCard">
+                <p><%= bingoCard.position_1 %></p>
+                <p><%= bingoCard.position_2 %></p>
+                <p><%= bingoCard.position_3 %></p>
+                <p><%= bingoCard.position_4 %></p>
+                <p><%= bingoCard.position_5 %></p>
+            </div>
+            <div class="bingoCard">
+                <p><%= bingoCard.position_1 %></p>
+                <p><%= bingoCard.position_1 %></p>
+                <p><%= bingoCard.position_1 %></p>
+                <p><%= bingoCard.position_1 %></p>
+                <p><%= bingoCard.position_1 %></p>
+            </div>
+
+            <div class="bingoCard">
+                <p><%= bingoCard.position_1 %></p>
+                <p><%= bingoCard.position_1 %></p>
+                <p>Bingo</p>
+                <p><%= bingoCard.position_1 %></p>
+                <p><%= bingoCard.position_1 %></p>
+            </div>
+            
+            <div class="bingoCard">
+                <p><%= bingoCard.position_1 %></p>
+                <p><%= bingoCard.position_1 %></p>
+                <p><%= bingoCard.position_1 %></p>
+                <p><%= bingoCard.position_1 %></p>
+                <p><%= bingoCard.position_1 %></p>
+            </div>
+
+            <div class="bingoCard">
+                <p><%= bingoCard.position_1 %></p>
+                <p><%= bingoCard.position_1 %></p>
+                <p><%= bingoCard.position_1 %></p>
+                <p><%= bingoCard.position_1 %></p>
+                <p><%= bingoCard.position_1 %></p>
+            </div>
+
+        <% }) %>
+    <%}  else { %>
+        <p>Sem cartelas nesse evento</p>
+     <% } %>
+</body>
+</html>

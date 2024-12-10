@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/event?_method=PATCH&idEvent=<%= existingEvents.id %>" method="post">
+        <label for="description">Descrição do evento: </label>
+        <input type="text" name="description" id="description" value="<%= existingEvents.description %>">
+
+        <label for="date">Data do evento: </label>
+        <input type="date" name="date" id="date" value="<% existingEvents.date %>">
+
+        <button type="submit">Salvar</button>
+    </form>
+    <form action="/event?_method=DELETE&idEvent=<%= existingEvents.id %>" method="post">
+        <button type="submit">Deletar Evento</button>
+    </form>
+</body>
+</html>

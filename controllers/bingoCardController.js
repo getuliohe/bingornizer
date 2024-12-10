@@ -4,9 +4,20 @@ const {Router} = require('express');
 
 const roteador = Router();
 
-roteador.get('/', (req, res) => {
+roteador.get('/newBingoCard', (req, res) => {
     const idEvent = req.query;
-    res.render('newBingoCard', {idEvent})
+    res.render('newBingoCard', {...idEvent})
+})
+
+roteador.get('/', async (req, res) => {
+    const idEvent = req.query;
+    const existingBingoCards = await bingo_card.findAll({
+        where:{
+            idEvent: idEvent.idEvent
+        }
+    })
+    res.render('homeBingoCard', {existingBingoCards})
+    // res.send(existingBingoCards)
 })
 
 roteador.post('/', async (req, res) => {
@@ -40,7 +51,7 @@ roteador.post('/', async (req, res) => {
     } = req.body;
 
     try {
-            await bingo_card.create({ idEvent, 
+            await bingo_card.create({ idEvent: idEvent.idEvent, 
                 position_1,
                 position_2,
                 position_3,

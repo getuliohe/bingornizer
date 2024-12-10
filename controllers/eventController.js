@@ -1,3 +1,4 @@
+const { where } = require('sequelize');
 const {event} = require('../models');
 const {Router} = require('express');
 
@@ -80,4 +81,17 @@ roteador.post('/', async (req, res) => {
         res.status(500).send('<h1>Erro interno do servidor</h1>');
     }
 });
+
+roteador.get('/editEvent', async (req, res) => {
+    const idEvent = req.query;
+
+    const existingEvents = await event.findOne({
+        where:{
+            id: idEvent.idEvent
+        }
+    })
+    // res.send(existingEvents)
+    res.render('editEvent', {existingEvents})
+})
+
 module.exports = roteador;
