@@ -1,8 +1,11 @@
 const {user, event} = require('../models');
 const {Router} = require('express');
+const { where } = require('sequelize');
+const methodOverride = require('method-override');
 
 const roteador = Router();
 
+roteador.use(methodOverride('_method'));
 // CRUD - Create, Read, Update, Delete
 
 // READ: listar todos os usuários
@@ -42,19 +45,27 @@ roteador.post('/', async (req, res) => {
 
 // UPDATE: atualizar um usuário
 roteador.patch('/', async (req, res) => {
-    const {idUsuario, password} = req.body;
+    const existingUser = req.session.user;
+    const {username, email, password} = req.body;
     try {
-        const existingUser = await user.findOne({
-            where: {id: idUsuario}
-        });
-
         if (!existingUser) {
             res.send('<h1>Usuário não encontrado</h1>');
         } else {
-            await user.update({password}, {
-                where: {id: idUsuario}
+            await user.update({username, email, password}, {
+                where: {id: existingUser.id}
             });
-            res.redirect('/usuario');
+            const existingEvents = await event.findAll({
+                where: {
+                    idUser: existingUser.id
+                }
+            });
+            const newUser = await user.findOne({
+                where: {
+                    id: existingUser.id
+                }
+            })
+            req.session.user = newUser
+            res.render('homeUser', {existingEvents});
         }
     } catch (error) {
         console.error(error);
@@ -64,19 +75,16 @@ roteador.patch('/', async (req, res) => {
 
 // DELETE: deletar um usuário
 roteador.delete('/', async (req, res) => {
-    const {idUsuario} = req.body;
+    const existingUser = req.session.user;
     try {
-        const existingUser = await user.findOne({
-            where: {id: idUsuario}
-        });
-
         if (!existingUser) {
             res.send('<h1>Usuário não encontrado</h1>');
         } else {
             await user.destroy({
-                where: {id: idUsuario}
+                where: {id: existingUser.id}
             });
-            res.redirect('/usuario');
+            req.session.user = null;
+            res.render('homePage');
         }
     } catch (error) {
         console.error(error);
@@ -110,7 +118,7 @@ roteador.post('/login', async (req, res) => {
 
             res.render('homeUser', {existingEvents})
         } else {
-            alert('usuario inexistente');
+            res.send('usuario inexistente');
         }
     } catch (error) {
         console.error(error);
@@ -120,6 +128,11 @@ roteador.post('/login', async (req, res) => {
 
 roteador.get('/cadastro', (req, res) => {
     res.render('cadastro')
+})
+
+roteador.get('/editUser', (req, res) => {
+    const existingUser = req.session.user;
+    res.render('editUser', {existingUser})
 })
 
 module.exports = roteador;

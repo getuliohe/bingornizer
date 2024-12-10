@@ -6,6 +6,7 @@ const { user, event } = require('./models');
 const { where } = require("sequelize");
 const { stringify } = require("querystring");
 const session = require('express-session');
+const methodOverride = require('method-override');
 
 const app = express();
 const timeSession = 1000*60*10
@@ -26,6 +27,8 @@ app.use(json());
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+
+app.use(methodOverride('_method'));
 
 app.listen('3000', () => {
     console.log("estou na porta 3000")

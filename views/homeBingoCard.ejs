@@ -48,7 +48,10 @@
                 <p><%= bingoCard.position_1 %></p>
                 <p><%= bingoCard.position_1 %></p>
             </div>
-
+            <a href="/bingoCard/editBingoCard?bingoId=<%= bingoCard.id %>">Editar</a>
+            <form action="/bingoCard?_method=DELETE&bingoId=<%= bingoCard.id %>">
+                <button type="submit">Apagar</button>
+            </form>
         <% }) %>
     <%}  else { %>
         <p>Sem cartelas nesse evento</p>

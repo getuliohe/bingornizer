@@ -1,12 +1,11 @@
 const { where } = require('sequelize');
 const {event} = require('../models');
 const {Router} = require('express');
+const methodOverride = require('method-override');
 
 const roteador = Router();
+roteador.use(methodOverride('_method'));
 
-// CRUD - Create, Read, Update, Delete
-
-// READ: listar todos os usuários
 roteador.get('/', async (req, res) => {
     try {
         const events = await event.findAll();
@@ -19,19 +18,26 @@ roteador.get('/', async (req, res) => {
 
 // UPDATE: atualizar um usuário
 roteador.patch('/', async (req, res) => {
-    const {idUsuario, password} = req.body;
+    const {idEvent} = req.query;
+    const {description, date} = req.body;
     try {
-        const existingUser = await event.findOne({
-            where: {id: idUsuario}
+        const existingEvent = await event.findOne({
+            where: {id: idEvent}
         });
 
-        if (!existingUser) {
+        if (!existingEvent) {
             res.send('<h1>Usuário não encontrado</h1>');
         } else {
-            await event.update({password}, {
-                where: {id: idUsuario}
+            await event.update({description, date},{
+                where: {id: idEvent}
             });
-            res.redirect('/usuario');
+            const user = req.session.user;
+            existingEvents = await event.findAll({
+                where: {
+                    idUser: user.id
+                }
+            });    
+            res.render('homeUser', {existingEvent});
         }
     } catch (error) {
         console.error(error);
@@ -41,19 +47,25 @@ roteador.patch('/', async (req, res) => {
 
 // DELETE: deletar um usuário
 roteador.delete('/', async (req, res) => {
-    const {idUsuario} = req.body;
+    const {idEvent} = req.query;
     try {
-        const existingUser = await event.findOne({
-            where: {id: idUsuario}
+        const existingEvent = await event.findOne({
+            where: {id: idEvent}
         });
 
-        if (!existingUser) {
+        if (!existingEvent) {
             res.send('<h1>Usuário não encontrado</h1>');
         } else {
             await event.destroy({
-                where: {id: idUsuario}
+                where: {id: idEvent}
             });
-            res.redirect('/usuario');
+            const user = req.session.user;
+            existingEvents = await event.findAll({
+                where: {
+                    idUser: user.id
+                }
+            });    
+            res.render('homeUser', {existingEvent});
         }
     } catch (error) {
         console.error(error);
