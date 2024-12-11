@@ -190,8 +190,4 @@ roteador.delete('/', async (req, res) => {
     }
 });
 
-roteador.get('/login', (req, res) => {
-    res.render('login')
-})
-
 module.exports = roteador;
