@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "u47_5AqlGqTCoI",
-    "password": "9U^9.Ft0p3rn5YA4=7xmzfm2",
-    "database": "s47_trabalhoraul",
-    "host": "144.22.175.68",
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
