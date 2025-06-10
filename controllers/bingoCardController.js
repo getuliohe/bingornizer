@@ -168,19 +168,13 @@ roteador.patch('/', async (req, res) => {
 
 // DELETE: deletar um usuário
 roteador.delete('/', async (req, res) => {
-    const {bingoId} = req.query;
+    const {bingoId, idEvent} = req.query;
     try {
-            await bingo_card.destroy({
-                where: {id: bingoId}
-            });
-            const existingUser = req.session.user;
+        await bingo_card.destroy({
+            where: {id: bingoId}
+        });
 
-            const existingEvents = await event.findAll({
-                where: {
-                    idUser: existingUser.id
-                }
-            });
-            res.render('homeUser', {existingEvents});
+        res.redirect(`/bingoCard?idEvent=${idEvent}`);
     } catch (error) {
         console.error(error);
         res.status(500).send('<h1>Erro interno do servidor</h1>');

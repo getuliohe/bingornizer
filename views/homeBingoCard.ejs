@@ -100,7 +100,7 @@
                     </div>
                     
                     <a href="/bingoCard/editBingoCard?bingoId=<%= bingoCard.id %>" class="btn btn-primary">Editar</a>
-                    <form action="/bingoCard?_method=DELETE&bingoId=<%= bingoCard.id %>">
+                    <form action="/bingoCard?_method=DELETE&bingoId=<%= bingoCard.id %>&idEvent=<%= bingoCard.idEvent %>" method="post">
                         <button type="submit" class="btn btn-primary">Apagar</button>
                     </form>
                     <% }) %>
