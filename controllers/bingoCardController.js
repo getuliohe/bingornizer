@@ -22,10 +22,10 @@ roteador.get('/editBingoCard', async (req, res) => {
 })
 
 roteador.get('/', async (req, res) => {
-    const idEvent = req.query;
+    const idEvent = req.query.idEvent;
     const existingBingoCards = await bingo_card.findAll({
         where:{
-            idEvent: idEvent.idEvent
+            idEvent: idEvent
         }
     })
     res.render('homeBingoCard', {existingBingoCards})
@@ -33,9 +33,9 @@ roteador.get('/', async (req, res) => {
 })
 
 roteador.post('/', async (req, res) => {
-    const idEvent = req.query;
-    
-    const { 
+    const idEvent = req.query.idEvent;
+
+    const {
         position_1,
         position_2,
         position_3,
@@ -63,39 +63,36 @@ roteador.post('/', async (req, res) => {
     } = req.body;
 
     try {
-            await bingo_card.create({ idEvent: idEvent.idEvent, 
-                position_1,
-                position_2,
-                position_3,
-                position_4,
-                position_5,
-                position_6,
-                position_7,
-                position_8,
-                position_9,
-                position_10,
-                position_11,
-                position_12,
-                position_14,
-                position_15,
-                position_16,
-                position_17,
-                position_18,
-                position_19,
-                position_20,
-                position_21,
-                position_22,
-                position_23,
-                position_24,
-                position_25
-            });
-            const user = req.session;
-            const existingEvents = await event.findAll({
-                where: {
-                    idUser: user.id
-                }
-            });
-            res.redirect("homeUser", {existingEvents})
+        await bingo_card.create({ idEvent: idEvent,
+            position_1,
+            position_2,
+            position_3,
+            position_4,
+            position_5,
+            position_6,
+            position_7,
+            position_8,
+            position_9,
+            position_10,
+            position_11,
+            position_12,
+            position_14,
+            position_15,
+            position_16,
+            position_17,
+            position_18,
+            position_19,
+            position_20,
+            position_21,
+            position_22,
+            position_23,
+            position_24,
+            position_25
+        });
+
+        // Redireciona para a página de eventos após o sucesso.
+        res.redirect('/event');
+
     } catch (error) {
         console.error(error);
         res.status(500).send('<h1>Erro interno do servidor</h1>');

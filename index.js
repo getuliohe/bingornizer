@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 app.use(methodOverride('_method'));
 
-app.listen('3000', () => {
+app.listen(3000, () => {
     console.log("estou na porta 3000")
 });
 
@@ -45,8 +45,8 @@ function secure_pass(req, res, next){
 }
 
 app.get('/', (req, res) => {
-    res.render('homePage')
-})
+    res.render('homePage');
+});
 
 app.use('/user', userController);
 

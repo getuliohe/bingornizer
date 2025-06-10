@@ -6,16 +6,17 @@
     <br><br>
     <% if (existingEvents.length > 0) { %>
         <% existingEvents.forEach(event => { %>
-            <div class="dropdown-menu">
-                <h2><%= event.description %></h2>
-                <h3><%= event.date %></h3>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title"><%= event.description %></h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><%= new Date(event.date).toLocaleDateString('pt-BR', {timeZone: 'UTC'}) %></h6>
 
-                <a href="/bingoCard/newBingoCard?idEvent=<%= event.id %>" class="btn">Nova cartela</a>
-                <a href="/bingoCard?idEvent=<%= event.id  %>" class="btn">Ver as cartelas</a>
-                <a href="/event/editEvent?idEvent=<%= event.id %>" class="btn">Editar evento</a>
+                    <a href="/bingoCard/newBingoCard?idEvent=<%= event.id %>" class="btn btn-primary">Nova Cartela</a>
+                    <a href="/bingoCard?idEvent=<%= event.id  %>" class="btn btn-secondary">Ver Cartelas</a>
+                    <a href="/event/editEvent?idEvent=<%= event.id %>" class="btn btn-info">Editar Evento</a>
+                </div>
             </div>
-            <br>
-        <% }) %>     
+        <% }) %>
     <% } else {%>
         <h3>Sem eventos</h3>
     <% } %>

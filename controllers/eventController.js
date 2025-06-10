@@ -8,8 +8,13 @@ roteador.use(methodOverride('_method'));
 
 roteador.get('/', async (req, res) => {
     try {
-        const events = await event.findAll();
-        res.send(events);
+        const user = req.session.user;
+        const existingEvents = await event.findAll({
+            where: {
+                idUser: user.id
+            }
+        });
+        res.render('homeUser', { existingEvents });
     } catch (error) {
         console.error(error);
         res.status(500).send('<h1>Erro interno do servidor</h1>');
