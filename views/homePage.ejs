@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <a href="user/login">Login</a>
-    <a href="user/cadastro">Cadastre-se</a>
+<%- include('partials/head.ejs') %>
+<body class="p-3 m-0 border-0 bd-example m-0 border-0">
+    <ul class="dropdown-menu">
+        <li><h6 class="dropdown-header">Bingonizer</h6></li>
+        <li><a href="user/login" class="dropdown-item">Login</a></li>
+        <li> <a href="user/cadastro" class="dropdown-item">Cadastre-se</a></li>
+    </ul>
 </body>
 </html>

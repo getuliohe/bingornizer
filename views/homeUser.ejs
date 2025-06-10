@@ -1,24 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <a href="/event/newEvent">Novo Evento</a>
-    <a href="/user/editUser">Editar Usuário</a>
+<%- include('partials/head.ejs') %>
 
+<body class="p-3 m-0 border-0 bd-example m-0 border-0">
+    <a href="/event/newEvent" class="btn btn-primary">Novo Evento</a>
+    <a href="/user/editUser" class="btn btn-primary">Editar Usuário</a>
+    <br><br>
     <% if (existingEvents.length > 0) { %>
         <% existingEvents.forEach(event => { %>
-            <div>
-                <h2><%= event.date %></h2>
-                <h3><%= event.description %></h3>
+            <div class="dropdown-menu">
+                <h2><%= event.description %></h2>
+                <h3><%= event.date %></h3>
 
-                <a href="bingoCard/newBingoCard?idEvent=<%= event.id %>">Nova cartela</a>
-                <a href="/bingoCard?idEvent=<%= event.id  %>">Ver as cartelas</a>
-                <a href="/event/editEvent?idEvent=<%= event.id %>">Editar evento</a>
+                <a href="/bingoCard/newBingoCard?idEvent=<%= event.id %>" class="btn">Nova cartela</a>
+                <a href="/bingoCard?idEvent=<%= event.id  %>" class="btn">Ver as cartelas</a>
+                <a href="/event/editEvent?idEvent=<%= event.id %>" class="btn">Editar evento</a>
             </div>
+            <br>
         <% }) %>     
     <% } else {%>
         <h3>Sem eventos</h3>

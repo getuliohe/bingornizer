@@ -1,19 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<%- include('partials/head.ejs') %>
+
+<body class="p-3 m-0 border-0 bd-example m-0 border-0">
     <form action="/event/" method="post">
-        <label for="description">Descrição do evento: </label>
-        <input type="text" name="description" id="description">
+        <div class="mb-3">
+            <label for="description" class="form-label">Descrição do evento: </label>
+            <input type="text" name="description" id="description" class="form-control" required>
+        </div>
 
-        <label for="date">Data do evento: </label>
-        <input type="date" name="date" id="date">
+        <div class="mb-3">
+            <label for="date" class="form-label">Data do evento: </label>
+            <input type="date" name="date" id="date" class="form-control" required>
+        </div>
 
-        <button type="submit">Salvar</button>
+        <button type="submit" class="btn btn-primary">Salvar</button>
     </form>
 </body>
 </html>

@@ -1,25 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form action="/user/?_method=PATCH" method="post">
-        <label for="username">Digite seu username: </label>
-        <input type="text" name="username" id="username" required value="<%= existingUser.username %>">
-        <br><br>
-        <label for="email">Digite seu email: </label>
-        <input type="email" name="email" id="email" value="<%= existingUser.email %>">
-        <br><br>
-        <label for="password">Digite a senha: </label>
-        <input type="text" name="password" id="password" value="<%= existingUser.password %>">
+<%- include('partials/head.ejs') %>
 
-        <button type="submit">salvar</button>
+<body class="p-3 m-0 border-0 bd-example m-0 border-0">
+    <form action="/user/?_method=PATCH" method="post">
+        <div class="mb-3">
+            <label for="username" class="form-label">Digite seu username: </label>
+            <input class="form-control" type="text" name="username" id="username" required value="<%= existingUser.username %>">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Digite seu email: </label>
+            <input type="email" name="email" class="form-control" id="email" value="<%= existingUser.email %>">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Digite a senha: </label>
+            <input type="text" name="password" id="password" class="form-control" value="<%= existingUser.password %>">
+        </div>
+
+        <button class="btn btn-primary" type="submit">salvar</button>
+        <br><br>
     </form>
     <form action="/user?_method=DELETE" method="post">
-        <button type="submit">Apagar</button>
+        <button type="submit" class="btn btn-primary">Apagar</button>
     </form>
 </body>
 </html>
